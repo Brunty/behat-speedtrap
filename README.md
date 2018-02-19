@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Brunty/behat-speedtrap.svg?branch=master)](https://travis-ci.org/Brunty/behat-speedtrap)
 
-A smoke testing tool inspired by [symm/vape](https://github.com/symm/vape)
+Inspired by https://github.com/johnkary/phpunit-speedtrap
 
 ## Installation
 
