@@ -1,0 +1,9 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+  extensions:
+    Brunty\Behat\SpeedtrapExtension:
+      threshold: 500
+      report_length: 2

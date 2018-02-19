@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="brunty.speedtrap_extension.config"
+                 class="Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config"/>
+        <service id="brunty.speedtrap_extension.output_printer.current"
+                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleOutputPrinter"/>
+
+        <service id="brunty.speedtrap_extension.behat_console"
+                 class="Behat\Testwork\Output\Printer\ConsoleOutputPrinter"/>
+
+        <service id="brunty.speedtrap_extension.step_time_logger"
+                 class="Brunty\Behat\SpeedtrapExtension\Logger\SpeedtrapLogger"/>
+
+        <!-- event listener -->
+        <service id="brunty.speedtrap_extension.steptimelogger_listener"
+                 class="Brunty\Behat\SpeedtrapExtension\Listener\SpeedtrapListener" public="false">
+            <tag name="event_dispatcher.subscriber"/>
+            <argument type="service" id="brunty.speedtrap_extension.config"/>
+            <argument type="service" id="brunty.speedtrap_extension.step_time_logger"/>
+        </service>
+
+        <!-- output printers -->
+        <service id="brunty.speedtrap_extension.output_printer.console"
+                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleOutputPrinter"
+                 public="true">
+            <argument type="service" id="brunty.speedtrap_extension.config"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,14 @@
+{
+    "require": {
+        "behat/behat": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brunty\\Behat\\SpeedtrapExtension\\": "src/"
+        }
+    },
+    "require-dev": {
+        "symfony/process": "^4.0",
+        "symfony/filesystem": "^4.0"
+    }
+}
