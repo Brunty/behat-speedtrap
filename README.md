@@ -20,7 +20,7 @@ default:
     Brunty\Behat\SpeedtrapExtension: ~
 ```
 
-To configure the threshold for slow tests (default 2000ms) specify the configuration option:
+To configure the threshold for slow scenarios (default 2000ms) specify the configuration option:
 
 ```yaml
 default:
