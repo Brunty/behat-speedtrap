@@ -35,7 +35,16 @@ To configure the number of scenarios reported (default 10) specify the configura
 default:
   extensions:
     Brunty\Behat\SpeedtrapExtension:
-      report_length: 2 
+      report_length: 2
+```
+
+Optionally you may also set a threshold for individual steps to be reported. When the step threshold is `0`, the step threshold is ignored. The step threshold defaults to `0` (ignored):
+
+```yaml
+default:
+  extensions:
+    Brunty\Behat\SpeedtrapExtension:
+      step_threshold: 100 # this is in ms
 ```
 
 ## Contributing
