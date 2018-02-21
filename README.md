@@ -20,16 +20,16 @@ default:
     Brunty\Behat\SpeedtrapExtension: ~
 ```
 
-To configure the threshold for slow scenarios (default 2000ms) specify the configuration option:
+To configure the threshold for slow scenarios (default 2000ms) specify the `scenario_threshold` configuration option:
 
 ```yaml
 default:
   extensions:
     Brunty\Behat\SpeedtrapExtension:
-      threshold: 500 # this is in ms
+      scenario_threshold: 500 # this is in ms
 ```
 
-To configure the number of scenarios reported (default 10) specify the configuration option:
+To configure the number of scenarios reported (default 10) specify the `report_length` configuration option:
 
 ```yaml
 default:
@@ -38,7 +38,7 @@ default:
       report_length: 2
 ```
 
-Optionally you may also set a threshold for individual steps to be reported. When the step threshold is `0`, the step threshold is ignored. The step threshold defaults to `0` (ignored):
+Optionally you may also set `step_threshold` for individual steps to be reported. When the step threshold is `0`, the step threshold is ignored. The step threshold defaults to `0` (ignored):
 
 ```yaml
 default:

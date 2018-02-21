@@ -18,7 +18,7 @@ class Config
     /**
      * @var int
      */
-    private $threshold;
+    private $scenarioThreshold;
 
     /**
      * @var int
@@ -37,7 +37,7 @@ class Config
     public function __construct(ContainerBuilder $container, $config)
     {
         $this->container = $container;
-        $this->threshold = (int) $config['threshold'];
+        $this->scenarioThreshold = (int) $config['scenario_threshold'];
         $this->stepThreshold = (int) $config['step_threshold'];
         $this->reportLength = (int) $config['report_length'];
     }
@@ -45,9 +45,9 @@ class Config
     /**
      * @return int
      */
-    public function getThreshold(): int
+    public function getScenarioThreshold(): int
     {
-        return $this->threshold;
+        return $this->scenarioThreshold;
     }
 
     /**

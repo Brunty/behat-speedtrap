@@ -32,7 +32,7 @@ class ConsoleScenarioOutputPrinter implements OutputPrinter
             return;
         }
 
-        $output->writeln("The following scenarios were above your configured threshold: {$this->config->getThreshold()}ms");
+        $output->writeln("The following scenarios were above your configured threshold: {$this->config->getScenarioThreshold()}ms");
 
         $numberOutputted = 0;
         foreach ($scenarios as $scenario => $time) {

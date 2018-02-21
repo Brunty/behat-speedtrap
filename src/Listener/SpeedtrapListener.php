@@ -105,7 +105,7 @@ class SpeedtrapListener implements EventSubscriberInterface
      */
     private function outputScenarios()
     {
-        $avgTimes = $this->speedtrapLogger->getScenariosAboveThreshold($this->config->getThreshold());
+        $avgTimes = $this->speedtrapLogger->getScenariosAboveThreshold($this->config->getScenarioThreshold());
         $this->speedtrapLogger->clear();
 
         foreach ($this->config->getOutputPrinters() as $printer) {
