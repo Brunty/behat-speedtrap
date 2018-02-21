@@ -48,7 +48,7 @@ class SpeedtrapExtension implements Extension
                     ->defaultValue(2000)
                 ->end()
                 ->scalarNode('step_threshold')
-                    ->defaultValue(500)
+                    ->defaultValue(0)
                 ->end()
                 ->scalarNode('report_length')
                     ->defaultValue(10)

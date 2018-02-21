@@ -106,3 +106,44 @@ Feature: Slow scenarios are logged at the end of the test suite running
     """
     The following steps were above your configured threshold: 500ms
     """
+
+  Scenario: Setting a step threshold of zero does not output long steps
+    Given I have the feature:
+    """
+    Feature: Slow scenarios are logged
+    Scenario: This scenario should be logged
+      When I wait for 2 seconds
+    """
+    And I have the configuration:
+    """
+    default:
+      extensions:
+        Brunty\Behat\SpeedtrapExtension:
+            threshold: 500
+            step_threshold: 0
+    """
+    When I run behat
+    Then I should not see:
+    """
+    The following steps were above your configured threshold
+    """
+
+  Scenario: Omitting the step threshold (i.e. using default value) does not output long steps
+    Given I have the feature:
+    """
+    Feature: Slow scenarios are logged
+    Scenario: This scenario should be logged
+      When I wait for 2 seconds
+    """
+    And I have the configuration:
+    """
+    default:
+      extensions:
+        Brunty\Behat\SpeedtrapExtension:
+            threshold: 500
+    """
+    When I run behat
+    Then I should not see:
+    """
+    The following steps were above your configured threshold
+    """

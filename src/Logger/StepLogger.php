@@ -18,6 +18,9 @@ class StepLogger implements \Countable
 
     public function getStepsAboveThreshold(int $threshold): array
     {
+        if ($threshold === 0) {
+            return [];
+        }
         return array_filter(
             $this->stepTimes,
             function ($time) use ($threshold) {
