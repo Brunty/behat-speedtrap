@@ -34,6 +34,7 @@ Feature: Slow scenarios are logged at the end of the test suite running
       extensions:
         Brunty\Behat\SpeedtrapExtension:
             threshold: 500
+            step_threshold: 3000
     """
     When I run behat
     Then I should see:
@@ -55,6 +56,7 @@ Feature: Slow scenarios are logged at the end of the test suite running
       extensions:
         Brunty\Behat\SpeedtrapExtension:
             threshold: 500
+            step_threshold: 3000
     """
     When I run behat
     Then I should not see:

@@ -23,6 +23,11 @@ class Config
     /**
      * @var int
      */
+    private $stepThreshold;
+
+    /**
+     * @var int
+     */
     private $reportLength;
 
     /**
@@ -33,6 +38,7 @@ class Config
     {
         $this->container = $container;
         $this->threshold = (int) $config['threshold'];
+        $this->stepThreshold = (int) $config['step_threshold'];
         $this->reportLength = (int) $config['report_length'];
     }
 
@@ -42,6 +48,14 @@ class Config
     public function getThreshold(): int
     {
         return $this->threshold;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStepThreshold(): int
+    {
+        return $this->stepThreshold;
     }
 
     /**
