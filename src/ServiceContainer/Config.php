@@ -77,4 +77,15 @@ class Config
             $consolePrinter
         ];
     }
+
+    /**
+     * @return OutputPrinter[]
+     * @throws \Exception
+     */
+    public function getStepOutputPrinters(): array
+    {
+        return [
+            $this->container->get('brunty.speedtrap_extension.output_printer.step_console'),
+        ];
+    }
 }
