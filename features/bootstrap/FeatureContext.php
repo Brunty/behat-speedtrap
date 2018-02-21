@@ -137,6 +137,8 @@ class FeatureContext implements Context
 
     /**
      * @Then I should see:
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \RuntimeException
      */
     public function iShouldSee(PyStringNode $expected)
     {
@@ -154,7 +156,12 @@ class FeatureContext implements Context
         }
     }
 
-    private function outputContains(string $expected)
+    /**
+     * @param string $expected
+     * @return bool
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     */
+    private function outputContains(string $expected): bool
     {
         $output = $this->normaliseOutput($this->process->getOutput());
         $expected = $this->normaliseOutput($expected);
@@ -163,7 +170,7 @@ class FeatureContext implements Context
             return false;
         }
 
-        return strstr($output, $expected);
+        return strpos($output, $expected) !== false;
     }
 
     private function runBehat()
@@ -187,12 +194,29 @@ class FeatureContext implements Context
     }
 
     /**
-     * @param string
+     * Normalise output to remove whitespace, ANSI colour escape codes, and replaces the actual time to run with the
+     * string TIME to run for substitutions in scenarios.
      *
+     * @example
+     *  - 2005ms to run features/feature.feature:2 - This scenario should be logged
+     *    becomes
+     *  - TIME to run features/feature.feature:2 - This scenario should be logged
+     *
+     * @param string
      * @return string
      */
     private function normaliseOutput(string $output): string
     {
-        return trim(preg_replace('/[0-9ms.]+ \([0-9.GkMb]+\)/', 'TIME', preg_replace('/\\s+/', ' ', $output)));
+        return trim(
+            preg_replace(
+                '/\d+ms to run/',
+                'TIME to run',
+                preg_replace(
+                    '#\\x1b[[][^A-Za-z]*[A-Za-z]#',
+                    '',
+                    preg_replace('/\\s+/', ' ', $output)
+                )
+            )
+        );
     }
 }

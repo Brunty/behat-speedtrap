@@ -18,7 +18,12 @@ class Config
     /**
      * @var int
      */
-    private $threshold;
+    private $scenarioThreshold;
+
+    /**
+     * @var int
+     */
+    private $stepThreshold;
 
     /**
      * @var int
@@ -32,16 +37,25 @@ class Config
     public function __construct(ContainerBuilder $container, $config)
     {
         $this->container = $container;
-        $this->threshold = (int) $config['threshold'];
+        $this->scenarioThreshold = (int) $config['scenario_threshold'];
+        $this->stepThreshold = (int) $config['step_threshold'];
         $this->reportLength = (int) $config['report_length'];
     }
 
     /**
      * @return int
      */
-    public function getThreshold(): int
+    public function getScenarioThreshold(): int
     {
-        return $this->threshold;
+        return $this->scenarioThreshold;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStepThreshold(): int
+    {
+        return $this->stepThreshold;
     }
 
     /**
@@ -58,9 +72,19 @@ class Config
      */
     public function getOutputPrinters(): array
     {
-        $consolePrinter = $this->container->get('brunty.speedtrap_extension.output_printer.console');
         return [
-            $consolePrinter
+            $this->container->get('brunty.speedtrap_extension.output_printer.scenario_console'),
+        ];
+    }
+
+    /**
+     * @return OutputPrinter[]
+     * @throws \Exception
+     */
+    public function getStepOutputPrinters(): array
+    {
+        return [
+            $this->container->get('brunty.speedtrap_extension.output_printer.step_console'),
         ];
     }
 }

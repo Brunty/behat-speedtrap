@@ -44,8 +44,11 @@ class SpeedtrapExtension implements Extension
     {
         $builder
             ->children()
-                ->scalarNode('threshold')
+                ->scalarNode('scenario_threshold')
                     ->defaultValue(2000)
+                ->end()
+                ->scalarNode('step_threshold')
+                    ->defaultValue(0)
                 ->end()
                 ->scalarNode('report_length')
                     ->defaultValue(10)
