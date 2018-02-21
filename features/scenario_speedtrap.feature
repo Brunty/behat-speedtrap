@@ -39,6 +39,7 @@ Feature: Slow scenarios are logged at the end of the test suite running
     Then I should see:
     """
     The following scenarios were above your configured threshold: 500ms
+    TIME to run features/feature.feature:2 - This scenario should be logged
     """
 
   Scenario: Scenarios below the threshold are not logged
