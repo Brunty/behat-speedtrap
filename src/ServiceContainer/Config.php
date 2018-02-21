@@ -72,9 +72,8 @@ class Config
      */
     public function getOutputPrinters(): array
     {
-        $consolePrinter = $this->container->get('brunty.speedtrap_extension.output_printer.console');
         return [
-            $consolePrinter
+            $this->container->get('brunty.speedtrap_extension.output_printer.scenario_console'),
         ];
     }
 

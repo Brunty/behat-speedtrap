@@ -4,7 +4,7 @@ namespace Brunty\Behat\SpeedtrapExtension\Printer;
 use Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class ConsoleOutputPrinter implements OutputPrinter
+class ConsoleScenarioOutputPrinter implements OutputPrinter
 {
 
     /**

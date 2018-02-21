@@ -2,7 +2,7 @@
 
 namespace Brunty\Behat\SpeedtrapExtension\Logger;
 
-class SpeedtrapLogger implements \Countable
+class ScenarioLogger implements \Countable
 {
     private $scenarioTimes = [];
 

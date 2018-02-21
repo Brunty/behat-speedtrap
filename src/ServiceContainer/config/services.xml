@@ -6,13 +6,13 @@
         <service id="brunty.speedtrap_extension.config"
                  class="Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config"/>
         <service id="brunty.speedtrap_extension.output_printer.current"
-                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleOutputPrinter"/>
+                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleScenarioOutputPrinter"/>
 
         <service id="brunty.speedtrap_extension.behat_console"
-                 class="Behat\Testwork\Output\Printer\ConsoleOutputPrinter"/>
+                 class="Behat\Testwork\Output\Printer\ConsoleScenarioOutputPrinter"/>
 
         <service id="brunty.speedtrap_extension.scenario_time_logger"
-                 class="Brunty\Behat\SpeedtrapExtension\Logger\SpeedtrapLogger"/>
+                 class="Brunty\Behat\SpeedtrapExtension\Logger\ScenarioLogger"/>
 
         <service id="brunty.speedtrap_extension.step_time_logger"
                  class="Brunty\Behat\SpeedtrapExtension\Logger\StepLogger"/>
@@ -27,8 +27,8 @@
         </service>
 
         <!-- output printers -->
-        <service id="brunty.speedtrap_extension.output_printer.console"
-                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleOutputPrinter"
+        <service id="brunty.speedtrap_extension.output_printer.scenario_console"
+                 class="Brunty\Behat\SpeedtrapExtension\Printer\ConsoleScenarioOutputPrinter"
                  public="true">
             <argument type="service" id="brunty.speedtrap_extension.config"/>
         </service>

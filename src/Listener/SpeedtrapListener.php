@@ -11,7 +11,7 @@ use Behat\Behat\EventDispatcher\Event\StepTested;
 use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use Brunty\Behat\SpeedtrapExtension\Logger\StepLogger;
 use Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config;
-use Brunty\Behat\SpeedtrapExtension\Logger\SpeedtrapLogger;
+use Brunty\Behat\SpeedtrapExtension\Logger\ScenarioLogger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SpeedtrapListener implements EventSubscriberInterface
@@ -22,7 +22,7 @@ class SpeedtrapListener implements EventSubscriberInterface
     private $config;
 
     /**
-     * @var SpeedtrapLogger
+     * @var ScenarioLogger
      */
     private $speedtrapLogger;
 
@@ -33,10 +33,10 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param Config $config
-     * @param SpeedtrapLogger $speedtrapLogger
+     * @param ScenarioLogger $speedtrapLogger
      * @param StepLogger $stepLogger
      */
-    public function __construct(Config $config, SpeedtrapLogger $speedtrapLogger, StepLogger $stepLogger)
+    public function __construct(Config $config, ScenarioLogger $speedtrapLogger, StepLogger $stepLogger)
     {
         $this->config = $config;
         $this->speedtrapLogger = $speedtrapLogger;
