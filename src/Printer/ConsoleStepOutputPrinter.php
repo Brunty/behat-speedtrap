@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Brunty\Behat\SpeedtrapExtension\Printer;
 
@@ -18,9 +19,7 @@ class ConsoleStepOutputPrinter implements OutputPrinter
     }
 
     /**
-     * @param array $steps
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function printLogs(array $steps)
     {

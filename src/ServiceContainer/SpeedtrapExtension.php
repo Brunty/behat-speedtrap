@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Brunty\Behat\SpeedtrapExtension\ServiceContainer;
 
@@ -9,14 +10,14 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-class SpeedtrapExtension implements Extension
+final class SpeedtrapExtension implements Extension
 {
     const CONFIG_KEY = 'speedtraplogger';
 
     /**
      * {@inheritdoc}
      */
-    public function getConfigKey()
+    public function getConfigKey(): string
     {
         return self::CONFIG_KEY;
     }
@@ -42,6 +43,7 @@ class SpeedtrapExtension implements Extension
      */
     public function configure(ArrayNodeDefinition $builder)
     {
+        /** @noinspection NullPointerExceptionInspection */
         $builder
             ->children()
                 ->scalarNode('scenario_threshold')
@@ -58,6 +60,7 @@ class SpeedtrapExtension implements Extension
 
     /**
      * {@inheritdoc}
+     * @throws \Exception
      */
     public function load(ContainerBuilder $container, array $config)
     {
@@ -70,8 +73,9 @@ class SpeedtrapExtension implements Extension
 
     /**
      * @return \Closure
+     * @throws \InvalidArgumentException
      */
-    private function getOutputTypeValidator()
+    private function getOutputTypeValidator(): callable
     {
         return function ($value) {
             $allowed = ['console', 'csv'];
@@ -79,7 +83,7 @@ class SpeedtrapExtension implements Extension
 
             if ( ! empty($invalid)) {
                 $message = 'Invalid output types: %s. Allowed types: %s';
-                throw new \InvalidArgumentException(sprintf($message, join(',', $invalid), join(',', $allowed)));
+                throw new \InvalidArgumentException(sprintf($message, implode(',', $invalid), implode(',', $allowed)));
             }
 
             return $value;
