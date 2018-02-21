@@ -24,7 +24,7 @@ class SpeedtrapListener implements EventSubscriberInterface
     /**
      * @var ScenarioLogger
      */
-    private $speedtrapLogger;
+    private $scenarioLogger;
 
     /**
      * @var StepLogger
@@ -33,13 +33,13 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param Config $config
-     * @param ScenarioLogger $speedtrapLogger
+     * @param ScenarioLogger $scenarioLogger
      * @param StepLogger $stepLogger
      */
-    public function __construct(Config $config, ScenarioLogger $speedtrapLogger, StepLogger $stepLogger)
+    public function __construct(Config $config, ScenarioLogger $scenarioLogger, StepLogger $stepLogger)
     {
         $this->config = $config;
-        $this->speedtrapLogger = $speedtrapLogger;
+        $this->scenarioLogger = $scenarioLogger;
         $this->stepLogger = $stepLogger;
     }
 
@@ -78,7 +78,7 @@ class SpeedtrapListener implements EventSubscriberInterface
      */
     public function scenarioStarted(BeforeScenarioTested $event)
     {
-        $this->speedtrapLogger->logScenarioStarted($this->getFormattedScenarioName($event));
+        $this->scenarioLogger->logScenarioStarted($this->getFormattedScenarioName($event));
     }
 
     /**
@@ -86,7 +86,7 @@ class SpeedtrapListener implements EventSubscriberInterface
      */
     public function scenarioFinished(AfterScenarioTested $event)
     {
-        $this->speedtrapLogger->logScenarioFinished($this->getFormattedScenarioName($event));
+        $this->scenarioLogger->logScenarioFinished($this->getFormattedScenarioName($event));
     }
 
     /**
@@ -105,8 +105,8 @@ class SpeedtrapListener implements EventSubscriberInterface
      */
     private function outputScenarios()
     {
-        $avgTimes = $this->speedtrapLogger->getScenariosAboveThreshold($this->config->getScenarioThreshold());
-        $this->speedtrapLogger->clear();
+        $avgTimes = $this->scenarioLogger->getScenariosAboveThreshold($this->config->getScenarioThreshold());
+        $this->scenarioLogger->clear();
 
         foreach ($this->config->getOutputPrinters() as $printer) {
             $printer->printLogs($avgTimes);
