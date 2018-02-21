@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
+
 namespace Brunty\Behat\SpeedtrapExtension\Printer;
 
 use Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class ConsoleScenarioOutputPrinter implements OutputPrinter
+final class ConsoleScenarioOutputPrinter implements OutputPrinter
 {
-
     /**
      * @var Config
      */
@@ -18,9 +19,7 @@ class ConsoleScenarioOutputPrinter implements OutputPrinter
     }
 
     /**
-     * @param  array $scenarios
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function printLogs(array $scenarios)
     {
@@ -44,7 +43,7 @@ class ConsoleScenarioOutputPrinter implements OutputPrinter
             $output->writeln("<comment>{$time}ms</comment> to run {$scenario}");
         }
 
-        $totalNumberOfSlowScenarios = count($scenarios);
+        $totalNumberOfSlowScenarios = \count($scenarios);
         if ($numberOutputted !== $totalNumberOfSlowScenarios) {
             $output->writeln("<comment>Of a total of {$totalNumberOfSlowScenarios} scenarios logged</comment>");
         }

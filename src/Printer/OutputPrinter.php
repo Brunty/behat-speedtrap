@@ -1,14 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Brunty\Behat\SpeedtrapExtension\Printer;
 
 interface OutputPrinter
 {
-    const SERVICE_ID_PREFIX = 'brunty.speedtrap_extension.output_printer';
-
     /**
-     * @param array $scenarios
-     *
+     * @param float[] $scenarios
      * @return void
      */
     public function printLogs(array $scenarios);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Brunty\Behat\SpeedtrapExtension\Listener;
 
@@ -14,7 +15,7 @@ use Brunty\Behat\SpeedtrapExtension\ServiceContainer\Config;
 use Brunty\Behat\SpeedtrapExtension\Logger\ScenarioLogger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class SpeedtrapListener implements EventSubscriberInterface
+final class SpeedtrapListener implements EventSubscriberInterface
 {
     /**
      * @var Config
@@ -59,6 +60,7 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param BeforeStepTested $event
+     * @return void
      */
     public function stepStarted(BeforeStepTested $event)
     {
@@ -67,6 +69,7 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param AfterStepTested $event
+     * @return void
      */
     public function stepFinished(AfterStepTested $event)
     {
@@ -75,6 +78,7 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param BeforeScenarioTested $event
+     * @return void
      */
     public function scenarioStarted(BeforeScenarioTested $event)
     {
@@ -83,6 +87,7 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param AfterScenarioTested $event
+     * @return void
      */
     public function scenarioFinished(AfterScenarioTested $event)
     {
@@ -129,10 +134,9 @@ class SpeedtrapListener implements EventSubscriberInterface
 
     /**
      * @param ScenarioTested $event
-     *
-     * @return null|string
+     * @return string
      */
-    private function getFormattedScenarioName(ScenarioTested $event)
+    private function getFormattedScenarioName(ScenarioTested $event): string
     {
         return "{$event->getFeature()->getFile()}:{$event->getNode()->getLine()} - {$event->getScenario()->getTitle()}";
     }

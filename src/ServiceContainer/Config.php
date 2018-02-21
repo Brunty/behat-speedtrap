@@ -1,15 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Brunty\Behat\SpeedtrapExtension\ServiceContainer;
 
 use Brunty\Behat\SpeedtrapExtension\Printer\OutputPrinter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class Config
+final class Config
 {
-    const CONFIG_KEY_ENABLED_ALWAYS = 'enabled_always';
-    const CONFIG_KEY_FORMAT = 'output';
-
     /**
      * @var ContainerBuilder
      */

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
@@ -6,12 +7,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-/**
- * Behat context class.
- */
-class FeatureContext implements Context
+final class FeatureContext implements Context
 {
-
     /**
      * @var Filesystem
      */
@@ -23,17 +20,17 @@ class FeatureContext implements Context
     private $process;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $workingDirectory;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $input;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $option;
 
@@ -46,6 +43,8 @@ class FeatureContext implements Context
 
     /**
      * @BeforeScenario
+     * @return void
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function createWorkingDirectory()
     {
@@ -56,6 +55,8 @@ class FeatureContext implements Context
 
     /**
      * @AfterScenario
+     * @return void
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function clearWorkingDirectory()
     {
@@ -64,6 +65,8 @@ class FeatureContext implements Context
 
     /**
      * @BeforeScenario
+     * @return void
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
      */
     public function createProcess()
     {
@@ -72,6 +75,7 @@ class FeatureContext implements Context
 
     /**
      * @AfterScenario
+     * @return void
      */
     public function stopProcessIfRunning()
     {
@@ -82,6 +86,9 @@ class FeatureContext implements Context
 
     /**
      * @Given I have the configuration:
+     * @param PyStringNode $config
+     * @return void
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function iHaveTheConfiguration(PyStringNode $config)
     {
@@ -93,6 +100,9 @@ class FeatureContext implements Context
 
     /**
      * @Given I have the feature:
+     * @param PyStringNode $content
+     * @return void
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function iHaveTheFeature(PyStringNode $content)
     {
@@ -104,6 +114,9 @@ class FeatureContext implements Context
 
     /**
      * @Given I have the context:
+     * @param PyStringNode $definition
+     * @return void
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function iHaveTheContext(PyStringNode $definition)
     {
@@ -115,6 +128,9 @@ class FeatureContext implements Context
 
     /**
      * @When I run behat
+     * @return void
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\LogicException
      */
     public function iRunBehatWithTheOption()
     {
@@ -123,6 +139,10 @@ class FeatureContext implements Context
 
     /**
      * @Then I should not see:
+     * @param PyStringNode $expected
+     * @return void
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws RuntimeException
      */
     public function iShouldNotSee(PyStringNode $expected)
     {
@@ -132,11 +152,13 @@ class FeatureContext implements Context
             return; // we want to catch this exception as we don't want to see the content
         }
 
-        throw new Exception("Found content {$expected->getRaw()} when it shouldn't have shown");
+        throw new RuntimeException("Found content {$expected->getRaw()} when it shouldn't have shown");
     }
 
     /**
      * @Then I should see:
+     * @param PyStringNode $expected
+     * @return void
      * @throws \Symfony\Component\Process\Exception\LogicException
      * @throws \RuntimeException
      */
@@ -173,6 +195,11 @@ class FeatureContext implements Context
         return strpos($output, $expected) !== false;
     }
 
+    /**
+     * @return void
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     */
     private function runBehat()
     {
         $phpFinder = new PhpExecutableFinder();
