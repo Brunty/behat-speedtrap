@@ -137,6 +137,8 @@ class FeatureContext implements Context
 
     /**
      * @Then I should see:
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \RuntimeException
      */
     public function iShouldSee(PyStringNode $expected)
     {
@@ -154,7 +156,12 @@ class FeatureContext implements Context
         }
     }
 
-    private function outputContains(string $expected)
+    /**
+     * @param string $expected
+     * @return bool
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     */
+    private function outputContains(string $expected): bool
     {
         $output = $this->normaliseOutput($this->process->getOutput());
         $expected = $this->normaliseOutput($expected);
@@ -163,7 +170,7 @@ class FeatureContext implements Context
             return false;
         }
 
-        return strstr($output, $expected);
+        return strpos($output, $expected) !== false;
     }
 
     private function runBehat()
